@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f4f6f9;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .input-with-icon input {
+            width: 100%;
+            padding: 10px 12px 10px 35px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .input-with-icon input:focus {
+            border-color: #007bff;
+        }
+        .signup{
+            padding-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .signup a{
+            text-decoration: none;
+            color: rgb(1, 5, 255);
+            
+        }
+        .signup :hover a{
+            transition: 0.4s;
+            color: red;
+            text-decoration: underline;
+        }
+        .login{
+            padding-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .login a{
+            text-decoration: none;
+            color: rgb(1, 5, 255);
+            
+        }
+        .login :hover a{
+            transition: 0.4s;
+            color: red;
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .primary-btn {
+            background: #007bff;
+            color: #fff;
+        }
+
+        .primary-btn:hover {
+            background: #0056b3;
+        }
+
+        .secondary-btn {
+            background: #6c757d;
+            color: #fff;
+        }
+
+        .warning-box {
+            margin-top: 20px;
+            padding: 12px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #856404;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <form id="user-login-form">
+            <h2>User Login</h2>
+
+
+            <div class="input-group">
+                <label for="user-email">Email</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="user-email" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="user-password">Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="user-password" placeholder="Enter your password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn primary-btn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+
+            <button type="button" class="btn secondary-btn">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <div class="signup">
+                <p>Don't have a account? <a href="#" onclick="showSignup()">Signup</a></p>
+            </div>
+            
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span><strong>Warning:</strong> Unauthorized access attempts are monitored.</span>
+            </div>
+        </form>
+
+
+        <!-- Signup  -->
+    
+        <form id="user-signup-form" style="display:none;">
+            <h2>User Signup</h2>
+                        <div class="input-group">
+                    <label for="user-Name">Full-Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="Name" id="user-Name" placeholder="Enter your Name" required>
+                    </div>
+                </div>
+            <div class="input-group">
+                    <label for="user-email">Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="user-email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+    
+                <div class="input-group">
+                    <label for="user-password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="user-password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+    
+                <button type="submit" class="btn primary-btn">
+                    <i class="fas fa-sign-in-alt"></i> Signup
+                </button>
+    
+                <button type="button" class="btn secondary-btn">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+        
+                <div class="login">
+                <p>Already have an account ! <a href="#" onclick="showLogin()">login</a></p>
+    
+            </div>
+        </form>
+    </div>
+
+<script>
+
+    function showSignup() {
+        document.getElementById("user-login-form").style.display = "none";
+        document.getElementById("user-signup-form").style.display = "block";
+    }
+
+    function showLogin() {
+        document.getElementById("user-signup-form").style.display = "none";
+        document.getElementById("user-login-form").style.display = "block";
+    }
+</script>
+</body>
+</html>
