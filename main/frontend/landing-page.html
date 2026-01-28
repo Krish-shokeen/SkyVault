@@ -300,6 +300,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -351,34 +352,44 @@
             localStorage.removeItem('userData');
             localStorage.removeItem('guestMode');
         });
+        
 
         function selectRole(role) {
             localStorage.setItem('selectedRole', role);
-
+            
             if (role === 'user') {
-                openAuth();
+                openAuth("user-auth.html");
             } else if (role === 'organization') {
                 window.location.href = "organization-role.html";
-            } else if (role === 'admin') {
-                alert('Redirecting to Admin authentication...');
             }
-        }
-        function openAuth() {
-            document.getElementById("authModal").classList.add("active");
-            document.getElementById("authFrame").src = "user-auth.html";
-        }
-
-        function closeAuth() {
-            document.getElementById("authModal").classList.remove("active");
-            document.getElementById("authFrame").src = "";
-        }
-
-        window.onclick = function (e) {
-            const modal = document.getElementById("authModal");
-            if (e.target === modal) {
-                closeAuth();
+            else if (role === 'admin') {
+                openAuth("admin-auth.html");
             }
         };
+            
+            function openAuth(page) {
+                const modal = document.getElementById("authModal");
+                const frame = document.getElementById("authFrame");
+                
+                modal.classList.add("active");
+                frame.src = page;
+            }
+            
+            function closeAuth() {
+                const modal = document.getElementById("authModal");
+                const frame = document.getElementById("authFrame");
+                
+                modal.classList.remove("active");
+                frame.src = "";
+            }
+            
+            window.addEventListener("click", function (e) {
+                const modal = document.getElementById("authModal");
+                if (e.target === modal) {
+                    closeAuth();
+                }
+            });
     </script>
 </body>
+
 </html>

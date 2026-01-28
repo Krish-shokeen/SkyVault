@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,13 +30,13 @@
             position: absolute;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: moveBackground 20s linear infinite;
         }
 
         .container {
-            max-width: 900px; 
+            max-width: 900px;
             width: 100%;
             position: relative;
             z-index: 1;
@@ -52,7 +53,7 @@
             font-size: 3rem;
             margin-bottom: 1rem;
             font-weight: 900;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .role-cards {
@@ -88,20 +89,35 @@
             transition: transform 0.4s ease;
         }
 
-       
-        .role-card:nth-child(1) { animation-delay: 0.1s; }
-        .role-card:nth-child(2) { animation-delay: 0.3s; }
+
+        .role-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .role-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
 
 
-        .role-card:nth-child(1) .role-icon { background: linear-gradient(135deg, #FF9A8B, #FF6A88); } /* Warm for Teacher */
-        .role-card:nth-child(2) .role-icon { background: linear-gradient(135deg, #2AF598, #009EFD); } /* Cool for Student */
+        .role-card:nth-child(1) .role-icon {
+            background: linear-gradient(135deg, #FF9A8B, #FF6A88);
+        }
+
+        /* Warm for Teacher */
+        .role-card:nth-child(2) .role-icon {
+            background: linear-gradient(135deg, #2AF598, #009EFD);
+        }
+
+        /* Cool for Student */
 
         .role-card:hover {
             transform: translateY(-15px) scale(1.02);
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .role-card:hover::before { transform: scaleX(1); }
+        .role-card:hover::before {
+            transform: scaleX(1);
+        }
 
         .role-icon {
             width: 110px;
@@ -114,7 +130,7 @@
             font-size: 3.5rem;
             color: white;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         .role-card h2 {
@@ -150,23 +166,89 @@
         }
 
         @keyframes moveBackground {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
         }
+
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-40px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
-            .role-cards { grid-template-columns: 1fr; }
+            .role-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+         .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 420px;
+            max-width: 95%;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: #ff4d4d;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        iframe {
+            width: 100%;
+            height: 540px;
+            border: none;
+            border-radius: 15px;
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -195,22 +277,52 @@
             </div>
         </div>
     </div>
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+            <button class="close-btn" onclick="closeAuth()">×</button>
+            <iframe id="authFrame"></iframe>
+        </div>
+    </div>
 
-    <script>
-        function goToLogin(role) {
-            // Store the role for the login page to know which UI to show
-            localStorage.setItem('org_sub_role', role);
-            
-            // Redirecting to the actual login/auth page
-            if(role === 'teacher') {
-                alert('Moving to Teacher Login...');
-                // window.location.href = "teacher-login.html"; 
-            } else {
-                alert('Moving to Student Login...');
-                // window.location.href = "student-login.html";
-            }
+
+
+<script>
+    function goToLogin(role) {
+        localStorage.setItem('org_sub_role', role);
+
+        if (role === 'teacher') {
+            openAuth("teacher-auth.html");
+        } 
+        else if (role === 'student') {
+            openAuth("student-auth.html");
         }
-    </script>
+    }
+
+    function openAuth(page) {
+        const modal = document.getElementById("authModal");
+        const frame = document.getElementById("authFrame");
+
+        modal.classList.add("active");
+        frame.src = page;
+    }
+
+    function closeAuth() {
+        const modal = document.getElementById("authModal");
+        const frame = document.getElementById("authFrame");
+
+        modal.classList.remove("active");
+        frame.src = "";
+    }
+
+    window.addEventListener("click", function (e) {
+        const modal = document.getElementById("authModal");
+        if (e.target === modal) {
+            closeAuth();
+        }
+    });
+</script>
+
 
 </body>
+
 </html>

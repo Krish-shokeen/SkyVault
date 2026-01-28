@@ -70,38 +70,32 @@
         .input-with-icon input:focus {
             border-color: #007bff;
         }
-
-        .signup {
+        .signup{
             padding-top: 10px;
             display: flex;
             justify-content: center;
         }
-
-        .signup a {
+        .signup a{
             text-decoration: none;
             color: rgb(1, 5, 255);
-
+            
         }
-
-        .signup :hover a {
+        .signup :hover a{
             transition: 0.4s;
             color: red;
             text-decoration: underline;
         }
-
-        .login {
+        .login{
             padding-top: 10px;
             display: flex;
             justify-content: center;
         }
-
-        .login a {
+        .login a{
             text-decoration: none;
             color: rgb(1, 5, 255);
-
+            
         }
-
-        .login :hover a {
+        .login :hover a{
             transition: 0.4s;
             color: red;
             text-decoration: underline;
@@ -126,10 +120,10 @@
             background: #0056b3;
         }
 
-        .secondary-btn {
+        /* .secondary-btn {
             background: #6c757d;
             color: #fff;
-        }
+        } */
 
         .warning-box {
             margin-top: 20px;
@@ -150,23 +144,23 @@
 
     <div class="login-container">
 
-        <form id="user-login-form">
-            <h2>User Login</h2>
+        <form id="Admin-login-form">
+            <h2>Admin Login</h2>
 
 
             <div class="input-group">
-                <label for="user-email">Email</label>
+                <label for="Admin-email">Email</label>
                 <div class="input-with-icon">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="user-email" placeholder="Enter your email" required>
+                    <input type="email" id="Admin-email" placeholder="Enter your email" required>
                 </div>
             </div>
 
             <div class="input-group">
-                <label for="user-password">Password</label>
+                <label for="Admin-password">Password</label>
                 <div class="input-with-icon">
                     <i class="fas fa-lock"></i>
-                    <input type="password" id="user-password" placeholder="Enter your password" required>
+                    <input type="password" id="Admin-password" placeholder="Enter your password" required>
                 </div>
             </div>
 
@@ -174,13 +168,13 @@
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
 
-            <button type="button" class="btn secondary-btn">
+            <!-- <button type="button" class="btn secondary-btn">
                 <i class="fas fa-arrow-left"></i> Back
-            </button>
+            </button> -->
             <div class="signup">
                 <p>Don't have a account? <a href="#" onclick="showSignup()">Signup</a></p>
             </div>
-
+            
             <div class="warning-box">
                 <i class="fas fa-exclamation-triangle"></i>
                 <span><strong>Warning:</strong> Unauthorized access attempts are monitored.</span>
@@ -189,69 +183,58 @@
 
 
         <!-- Signup  -->
-
-        <form id="user-signup-form" style="display:none;">
-            <h2>User Signup</h2>
-            <div class="input-group">
-                <label for="user-Name">Full-Name</label>
-                <div class="input-with-icon">
-                    <i class="fas fa-user"></i>
-                    <input type="Name" id="user-Name" placeholder="Enter your Name" required>
+    
+        <form id="Admin-signup-form" style="display:none;">
+            <h2>Admin Signup</h2>
+                        <div class="input-group">
+                    <label for="Admin-Name">Full-Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-Admin"></i>
+                        <input type="Name" id="Admin-Name" placeholder="Enter your Name" required>
+                    </div>
                 </div>
-            </div>
             <div class="input-group">
-                <label for="user-email">Email</label>
-                <div class="input-with-icon">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" id="user-email" placeholder="Enter your email" required>
+                    <label for="Admin-email">Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="Admin-email" placeholder="Enter your email" required>
+                    </div>
                 </div>
-            </div>
-
-            <div class="input-group">
-                <label for="user-password">Password</label>
-                <div class="input-with-icon">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="user-password" placeholder="Enter your password" required>
+    
+                <div class="input-group">
+                    <label for="Admin-password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="Admin-password" placeholder="Enter your password" required>
+                    </div>
                 </div>
-            </div>
-
-            <button type="submit" class="btn primary-btn">
-                <i class="fas fa-sign-in-alt"></i> Signup
-            </button>
-
-            <button type="button" class="btn secondary-btn">
-                <i class="fas fa-arrow-left"></i> Back
-            </button>
-
-            <div class="login">
+    
+                <button type="submit" class="btn primary-btn">
+                    <i class="fas fa-sign-in-alt"></i> Signup
+                </button>
+    
+                <!-- <button type="button" class="btn secondary-btn">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button> -->
+        
+                <div class="login">
                 <p>Already have an account ! <a href="#" onclick="showLogin()">login</a></p>
-
+    
             </div>
         </form>
     </div>
 
-    <script>
-        document.getElementById('user-login-form').addEventListener("submit", function (e) {
-            e.preventDefault();
-            localStorage.setItem('user-login-form', 'user');
-            window.top.location.href = ('user-dashboard.html');
-        });
+<script>
 
-        document.getElementById('user-signup-form').addEventListener("submit", function (e) {
-            e.preventDefault();
-            localStorage.setItem('selectedRole', 'user');
-            window.top.location.href = 'user-dashboard.html';
-        });
+    function showSignup() {
+        document.getElementById("Admin-login-form").style.display = "none";
+        document.getElementById("Admin-signup-form").style.display = "block";
+    }
 
-        function showSignup() {
-            document.getElementById("user-login-form").style.display = "none";
-            document.getElementById("user-signup-form").style.display = "block";
-        }
-
-        function showLogin() {
-            document.getElementById("user-signup-form").style.display = "none";
-            document.getElementById("user-login-form").style.display = "block";
-        }
-    </script>
+    function showLogin() {
+        document.getElementById("Admin-signup-form").style.display = "none";
+        document.getElementById("Admin-login-form").style.display = "block";
+    }
+</script>
 </body>
 </html>
